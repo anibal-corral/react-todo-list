@@ -10,6 +10,7 @@ const todos = [
   {text: 'Bathe my daughter', completed:false },
   {text: 'Activate token Karmapoint', completed:false },
   {text: 'Drink a glass of milk', completed:false },
+  {text: 'Send DNS to Rodrigo', completed:true },
 ]
 
 function App() {
@@ -18,10 +19,10 @@ function App() {
      <TodoCounter/> 
     
     <TodoSearch/>
-    <input placeholder="Onion"/>
+    
     <TodoList>
       {todos.map(todo=>(
-        <TodoItem key={todo.text} text={todo.text}/>
+        <TodoItem key={todo.text} text={todo.text} completed={todo.completed}/>
       ))}
     </TodoList>
     <CreateTodoButton/>
