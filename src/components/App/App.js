@@ -1,16 +1,10 @@
-// import logo from './logo.svg';
-// import './App.css';
 import React from 'react';
-import {TodoCounter} from './TodoCounter';
-import {TodoSearch} from './TodoSearch';
-import {CreateTodoButton} from './CreateTodoButton';
-import {TodoList} from './TodoList';
-import {TodoItem} from './TodoItem';
+import { AppUI } from './AppUI';
 const defaultTodos = [
   {text: 'Bathe my daughter', completed:false },
-  {text: 'Activate token Karmapoint', completed:true },
+  {text: 'Activate token Karmapoint', completed:false },
   {text: 'Drink a glass of milk', completed:false },
-  {text: 'Send DNS to Rodrigo', completed:true },
+  {text: 'Send DNS to Rodrigo', completed:false },
 ]
 
 function App() {
@@ -23,8 +17,9 @@ const totalTodos = todos.length;
 //Filter todos
 let searchedTodos=[]//to save 
 if(!searchValue.length>0){
-  console.log('True');
+  // console.log('True');
   searchedTodos = todos;
+  // console.log(todos);
 }else{
   //Filter todos
   const searchText = searchValue.toLowerCase();
@@ -59,38 +54,16 @@ const deleteTodo = (text) => {
   setTodos(newTodos)
 }
 
-
   return (
-    <React.Fragment>
-     <TodoCounter
-     total={totalTodos}
-     completed = {completedTodosCount}
-     /> 
-  
-    <TodoSearch
-    //Send values to SearchComponent
-    /** 
-     *  searchValue and setSearchValue are the arguments' name in todosearch component
-     *  {searchValue} and {setSearchValue} are values.
-    */
-    searchValue = {searchValue}
-    setSearchValue = {setSearchValue}
-    />
-    
-    <TodoList>
-      {searchedTodos.map(todo=>(
-        <TodoItem 
-        key={todo.text} 
-        text={todo.text} 
-        completed={todo.completed}
-        onComplete = {()=>completeTodo(todo.text)}
-        onDelete = {()=>deleteTodo(todo.text)}
-        />
-      ))}
-    </TodoList>
-    <CreateTodoButton/>
-   
-    </React.Fragment>
+  <AppUI
+  totalTodos={totalTodos}
+  completedTodosCount = {completedTodosCount}
+  searchValue = {searchValue}
+  setSearchValue = {setSearchValue}
+  searchedTodos = {searchedTodos}
+  completeTodo ={completeTodo}
+  deleteTodo = {deleteTodo}
+    />    
   );
 }
 
