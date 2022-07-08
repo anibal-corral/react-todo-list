@@ -7,7 +7,10 @@ import {TodoList} from '../TodoList/TodoList';
 import {TodoItem} from '../TodoItem/TodoItem';
 
 function AppUI(
-    {totalTodos,
+    {
+      loading,
+      error,
+      totalTodos,
     completedTodosCount,
     searchValue,
     setSearchValue,
@@ -34,6 +37,11 @@ function AppUI(
     />
     
     <TodoList>
+    {error && <p>Error</p>}
+      {loading && <p>Loading</p>}
+      {(!loading && !searchedTodos.length)&& <p>Create your first todo</p>}
+      
+
       {searchedTodos.map(todo=>(
         <TodoItem 
         key={todo.text} 
