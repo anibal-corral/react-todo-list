@@ -8,9 +8,25 @@ const defaultTodos = [
 ]
 
 function App() {
+
+const localStorageTodos = localStorage.getItem('Todos_v1');
+//As the first time localstorage wil be empty. So we need to create it.
+let parsedTodos;
+
+if(!localStorageTodos){
+//No TODOs 
+// console.log('No encuentro el local storage asi que lo creare con algo mientras');
+  localStorage.setItem('Todos_v1', JSON.stringify([]));
+  parsedTodos=defaultTodos;
+}else{
+  //TODOs
+  // console.log('Hay algo en el localstorage');
+  parsedTodos = JSON.parse(localStorageTodos);
+}
+
 //Set this for TodoSearch Component
 const [searchValue, setSearchValue]=React.useState('');
-const [todos, setTodos] = React.useState(defaultTodos);
+const [todos, setTodos] = React.useState(parsedTodos);
 const completedTodosCount = todos.filter((todo)=>!!todo.completed).length;
 const totalTodos = todos.length;
 
@@ -31,6 +47,13 @@ if(!searchValue.length>0){
   )
 }
 
+//Function to save todos in local storgae 
+const saveTodos = (newTodos)=> {
+  const stringifidTodos= JSON.stringify(newTodos);
+  localStorage.setItem('Todos_v1', stringifidTodos);
+  setTodos(newTodos)
+};
+
 //function to set todo completed
 const completeTodo = (text) => {
   //Search the index of todo to delete
@@ -40,7 +63,7 @@ const completeTodo = (text) => {
   //Set completed
   searchedTodos[todoIndex].completed=true;
   //set Todos 
-  setTodos(newTodos)
+  saveTodos(newTodos)
 }
 //function to delete todo
 const deleteTodo = (text) => {
@@ -51,7 +74,7 @@ const deleteTodo = (text) => {
   //Delete todo index from array
   newTodos.splice(todoIndex,1);
   //set Todos 
-  setTodos(newTodos)
+  saveTodos(newTodos)
 }
 
   return (
