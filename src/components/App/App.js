@@ -6,27 +6,46 @@ const defaultTodos = [
   {text: 'Drink a glass of milk', completed:false },
   {text: 'Send DNS to Rodrigo', completed:false },
 ]
+//Function recive a string as a key which we use to go to localstorage
+function useLocalStorage(itemName, initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
+  //As the first time localstorage wil be empty. So we need to create it.
+  let parsedItems;
+  
+  if(!localStorageItem){
+  //No TODOs 
+  // console.log('No encuentro el local storage asi que lo creare con algo mientras');
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItems=initialValue;
+  }else{
+    //TODOs
+    // console.log('Hay algo en el localstorage');
+    parsedItems = JSON.parse(localStorageItem);
+  }  
+
+  const [item, setItems] = React.useState(parsedItems);
+
+  //Function to save todos in local storgae 
+const saveItems = (newItems)=> {
+  const stringifidItems= JSON.stringify(newItems);
+  localStorage.setItem(itemName, stringifidItems);
+  setItems(newItems)
+};
+
+return [
+  item,
+  saveItems
+]
+}
+
 
 function App() {
+const [todos, saveTodos] = useLocalStorage('TODO_V1', []);
 
-const localStorageTodos = localStorage.getItem('Todos_v1');
-//As the first time localstorage wil be empty. So we need to create it.
-let parsedTodos;
-
-if(!localStorageTodos){
-//No TODOs 
-// console.log('No encuentro el local storage asi que lo creare con algo mientras');
-  localStorage.setItem('Todos_v1', JSON.stringify([]));
-  parsedTodos=defaultTodos;
-}else{
-  //TODOs
-  // console.log('Hay algo en el localstorage');
-  parsedTodos = JSON.parse(localStorageTodos);
-}
 
 //Set this for TodoSearch Component
 const [searchValue, setSearchValue]=React.useState('');
-const [todos, setTodos] = React.useState(parsedTodos);
+
 const completedTodosCount = todos.filter((todo)=>!!todo.completed).length;
 const totalTodos = todos.length;
 
@@ -47,12 +66,7 @@ if(!searchValue.length>0){
   )
 }
 
-//Function to save todos in local storgae 
-const saveTodos = (newTodos)=> {
-  const stringifidTodos= JSON.stringify(newTodos);
-  localStorage.setItem('Todos_v1', stringifidTodos);
-  setTodos(newTodos)
-};
+
 
 //function to set todo completed
 const completeTodo = (text) => {
