@@ -8,8 +8,8 @@ const {
     saveItems:saveTodos, 
     loading,
   error} = useLocalStorage('TODO_V1', []);
-  
-  
+  //To Modal
+  const [openModal, setOpenModal]=React.useState(false);
   //Set this for TodoSearch Component
   const [searchValue, setSearchValue]=React.useState('');
   
@@ -68,7 +68,10 @@ const {
           setSearchValue,
           searchedTodos,
           completeTodo,
-          deleteTodo,}
+          deleteTodo,
+          openModal,
+          setOpenModal,
+        }
         }
         >
             {props.children}

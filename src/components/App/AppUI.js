@@ -6,6 +6,7 @@ import {TodoSearch} from '../TodoSearch/TodoSearch';
 import {CreateTodoButton} from '../CreateTodoButton/CreateTodoButton';
 import {TodoList} from '../TodoList/TodoList';
 import {TodoItem} from '../TodoItem/TodoItem';
+import {Modal} from '../Modal/Modal'
 
 function AppUI(
  
@@ -16,7 +17,10 @@ const {
   loading, 
   searchedTodos,
   completeTodo,
-  deleteTodo} = React.useContext(TodoContext);
+  deleteTodo,
+openModal,
+setOpenModal
+} = React.useContext(TodoContext);
 
     return (
 <React.Fragment>
@@ -38,7 +42,16 @@ const {
         />
       ))}
     </TodoList> 
-    <CreateTodoButton/>
+    {/* If OpenModal is true then show Modal */}
+    {
+    openModal && (
+    <Modal>
+      <p>Teletransportado</p>
+    </Modal>
+    )}
+    
+    <CreateTodoButton
+    />
    
     </React.Fragment>
     )
