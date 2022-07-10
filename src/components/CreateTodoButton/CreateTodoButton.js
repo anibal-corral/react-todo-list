@@ -7,7 +7,8 @@ function CreateTodoButton(){
 const {openModal, setOpenModal} = React.useContext(TodoContext);
 // console.log(openModal);
     const onClickButton = () => {
-        setOpenModal(!openModal);
+        // setOpenModal(!openModal);
+        setOpenModal(prevState =>!prevState);
       };
 
     return(
