@@ -6,7 +6,8 @@ import {TodoSearch} from '../TodoSearch/TodoSearch';
 import {CreateTodoButton} from '../CreateTodoButton/CreateTodoButton';
 import {TodoList} from '../TodoList/TodoList';
 import {TodoItem} from '../TodoItem/TodoItem';
-import {Modal} from '../Modal/Modal'
+import {Modal} from '../Modal/Modal';
+import {TodoForm} from '../TodoForm/TodoForm';
 
 function AppUI(
  
@@ -46,7 +47,7 @@ setOpenModal
     {
     openModal && (
     <Modal>
-      <p>Teletransportado</p>
+      <TodoForm></TodoForm>
     </Modal>
     )}
     

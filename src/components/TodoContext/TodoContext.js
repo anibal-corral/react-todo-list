@@ -1,6 +1,14 @@
 import React from 'react';
 import {useLocalStorage} from './useLocalStorage';
+
+
 const TodoContext = React.createContext();
+const defaultTodos = [
+  {text: 'Bathe my daughter', completed:false },
+  {text: 'Activate token Karmapoint', completed:false },
+  {text: 'Drink a glass of milk', completed:false },
+  {text: 'Send DNS to Rodrigo', completed:false },
+]
 function TodoProvider(props){
   // const [todos, saveTodos] = useLocalStorage('TODO_V1', []);
 const {
@@ -33,6 +41,17 @@ const {
     )
   }
   
+  function addTodo(text){
+    const newTodos = [...todos];
+    newTodos.push(
+      {
+        completed:false,
+        text:text
+      }
+    );
+    saveTodos(newTodos)
+
+  }
   
   
   //function to set todo completed
@@ -69,8 +88,10 @@ const {
           searchedTodos,
           completeTodo,
           deleteTodo,
+          addTodo,
           openModal,
           setOpenModal,
+
         }
         }
         >

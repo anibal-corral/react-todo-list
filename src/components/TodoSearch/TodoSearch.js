@@ -6,7 +6,7 @@ function TodoSearch(){
   //SearchValue is empty.
   // const [searchValue, setSearchValue] = React.useState('');
 //Now searchValue and setSearchVale are being received from externeal. In this case from App.js
-console.log(`I am filtering for ${searchValue}`);
+console.log(`I am filtering for`);
   const onSearchValueChange = (event) => {
     //When user type something, this value is set to searchValue property.
     setSearchValue(event.target.value);

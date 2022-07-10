@@ -1,4 +1,5 @@
 import React from 'react';
+
 //Function recive a string as a key which we use to go to localstorage
 function useLocalStorage(itemName, initialValue){
     const [loading, setLoading]=React.useState(true)
