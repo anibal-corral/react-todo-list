@@ -8,6 +8,10 @@ import {TodoList} from '../TodoList/TodoList';
 import {TodoItem} from '../TodoItem/TodoItem';
 import {Modal} from '../Modal/Modal';
 import {TodoForm} from '../TodoForm/TodoForm';
+//Loading Skeleton
+import {TodosError} from '../TodosError/TodosError';
+import { TodosLoading } from "../TodosLoading/TodosLoading";
+import { EmptyTodos } from "../EmptyTodos/EmptyTodos";
 
 function AppUI(
  
@@ -30,9 +34,9 @@ setOpenModal
     <TodoSearch/>
     
     <TodoList>
-    {error && <p>Error</p>}
-      {loading && <p>Loading</p>}
-      {(!loading && !searchedTodos.length)&& <p>Create your first todo</p>}
+    {error && <TodosError error={error}></TodosError>}
+      {loading && <TodosLoading></TodosLoading>}
+      {(!loading && !searchedTodos.length)&& <EmptyTodos></EmptyTodos>}
       {searchedTodos.map(todo=>(
         <TodoItem 
         key={todo.text} 
